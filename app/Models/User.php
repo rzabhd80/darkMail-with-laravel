@@ -44,9 +44,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
     public function sentBox () {
-        $this->hasMany(Email::class,"sender_id");
+        $this->hasMany(Email::class,"sender_id","id");
     }
     public function receiveBox(){
-        $this->hasMany(Email::class,"rec_id");
+        $this->hasMany(Email::class,"rec_id","id");
     }
 }

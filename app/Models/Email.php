@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Email extends Model
 {
     use HasFactory;
-    public function users () {
-        $this->belongsTo(User::class);
+    public function sender () {
+        $this->belongsTo(User::class,"sender_id");
+    }
+    public function receiver(){
+        $this->belongsTo(User::class,"rec_id","id") ;
     }
 }
