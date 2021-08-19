@@ -50,12 +50,12 @@
                             <div class="banner-content">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        @yield('content')
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @yield('content')
                 </div>
             </section>
         </div>
@@ -129,8 +129,4 @@
 <script src="/assets/js/owl-carousel.js"></script>
 <script src="/assets/js/custom.js"></script>
 </body>
-
-
-</body>
-
 </html>
