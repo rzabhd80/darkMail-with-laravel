@@ -10,7 +10,10 @@ class EmailController extends Controller
 {
     public function sentBox()
     {
-        $emails = Email::where("sender_id",\Auth::user()->id)->get();
-        return view("emails/index", ["emails" => $emails]);
+        return view("emails/sentBox", ["emails" => $emails]);
+    }
+    public function inbox () {
+        $emails = Email::where("rec_id",\Auth::user()->id)->get();
+        return view("emails.inbox");
     }
 }

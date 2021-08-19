@@ -76,7 +76,11 @@
             <!-- Menu -->
             <nav id="menu">
                 <ul>
-                    <li><a href="/">Homepage</a></li>
+                    @if (Auth::user())
+                        <li><a href="emails/create">Compose new mail</a></li>
+                    @else
+                        <li><a href="/">Homepage</a></li>
+                    @endif
                     @if (!Auth::user())
                         <li><a href={{route("login")}}>login</a></li>
                     @else
@@ -92,15 +96,18 @@
                                 <li><a href="#">starred</a></li>
                             </ul>
                         </li>
-                    <li>
-                        <span class="opener">Dropdown Two</span>
-                        <ul>
-                            <li><a href="#">Sub Menu #1</a></li>
-                            <li><a href="#">Sub Menu #2</a></li>
-                            <li><a href="#">Sub Menu #3</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="https://www.google.com">External Link</a></li>
+                        <li>
+                            <span class="opener">Dropdown Two</span>
+                            <ul>
+                                <li><a href="#">Sub Menu #1</a></li>
+                                <li><a href="#">Sub Menu #2</a></li>
+                                <li><a href="#">Sub Menu #3</a></li>
+                            </ul>
+                        </li>
+                        <form method="post" action="{{route("logout")}}">
+                            @csrf
+                            <button class="btn btn-secondary" type="submit">log out</button>
+                        </form>
                     @endif
                 </ul>
             </nav>
