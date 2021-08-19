@@ -17,6 +17,8 @@ class CreateEmailsTable extends Migration
             $table->bigIncrements("id");
             $table->unsignedBigInteger("sender_id");
             $table->unsignedBigInteger("rec_id");
+            $table->string("title");
+            $table->string("text");
             $table->boolean("draft")->default(false);
             $table->boolean("deleted")->default(false);
             $table->boolean("starred")->default(false);

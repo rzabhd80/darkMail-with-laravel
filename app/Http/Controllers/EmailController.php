@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Email;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class EmailController extends Controller
 {
-    public function sentBox () {
-        $email = User::where("id",\Auth::user()->id);
+    public function sentBox()
+    {
+        $emails = Email::where("sender_id",\Auth::user()->id)->get();
+        return view("emails/index", ["emails" => $emails]);
     }
 }

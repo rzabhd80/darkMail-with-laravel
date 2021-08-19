@@ -87,8 +87,8 @@
                         <li>
                             <span class="opener">Emails</span>
                             <ul>
-                                <li><a href="#">Inbox</a></li>
-                                <li><a href="#">Sent Box</a></li>
+                                <li><a href="/emails/sentBox">sent box</a></li>
+                                <li><a href="#">inbox</a></li>
                                 <li><a href="#">starred</a></li>
                             </ul>
                         </li>

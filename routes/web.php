@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Auth::routes(["verify"=>true]);
 Route::get("/",[\App\Http\Controllers\HomeController::class,"index"]);
+
+Route::prefix("/emails")->middleware("auth")->group(function () {
+    Route::get("/sentBox",[\App\Http\Controllers\EmailController::class,"sentBox"]);
+});
