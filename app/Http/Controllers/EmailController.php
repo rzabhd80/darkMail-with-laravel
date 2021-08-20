@@ -12,12 +12,18 @@ class EmailController extends Controller
     public function sentBox()
     {
         $emails = Email::where("sender_id", \Auth::user()->id)->get();
+        $emails = $emails->filter(function ($v) {
+            return !$v->deleted;
+        });
         return view("emails.box", ["emails" => $emails]);
     }
 
     public function inbox()
     {
         $emails = Email::where("rec_id", \Auth::user()->id)->get();
+        $emails=$emails->filter(function ($v) {
+            return !$v->deleted;
+        });
         return view("emails.box", ["emails" => $emails]);
     }
 
@@ -32,13 +38,22 @@ class EmailController extends Controller
             "title" => "required",
             "text" => "required",
             "receiver" => "required",
+            "attach.*" => "nullable|max:1999|mimes:jpg,pdf,png|file"
         ]);
+        if (\request()->hasFile("attach")) {
+            $fileName = \request()->file("attach")->getClientOriginalName();
+            $fileName .= time();
+            \request()->file("attach")->storeAs("public/attachs", $fileName);
+        } else {
+            $fileName = null;
+        }
         $email = new Email();
         $email->title = \request("title");
         $email->text = \request("text");
         $rec = User::where("email", \request("receiver"))->firstOrFail();
         $email->rec_id = $rec->id;
         $email->sender_id = \Auth::user()->id;
+        $email->attach = $fileName;
         $email->save();
         return redirect("/emails/sentBox");
     }
@@ -80,6 +95,6 @@ class EmailController extends Controller
         $emails = Email::where("sender_id", \Auth::user()->email)->orWhere("rec_id", \Auth::user()->id)->filter(function ($v) {
             return $v->deleted;
         });
-        return view("emails.box",["emails"=>$emails]);
+        return view("emails.box", ["emails" => $emails]);
     }
 }

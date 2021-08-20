@@ -77,7 +77,7 @@
             <nav id="menu">
                 <ul>
                     @if (Auth::user())
-                        <li><a href="emails/create">Compose new mail</a></li>
+                        <li><a href="/emails/create">Compose new mail</a></li>
                     @else
                         <li><a href="/">Homepage</a></li>
                     @endif

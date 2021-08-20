@@ -134,7 +134,6 @@
                                required autocomplete="new-password">
                     </div>
                 </div>
-
                 <hr>
                 <div>
                     <button class="btn btn-secondary" type="submit">register</button>

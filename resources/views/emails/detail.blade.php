@@ -25,6 +25,13 @@
             <li>{{$email_rec->email}}</li>
         </div>
         <br>
+        @if ($email->attach !=null)
+            <div>
+                <label>Attached file</label>
+                <img src="{{asset("storage/attachs/$email->attach")}}">
+            </div>
+
+        @endif
         <hr>
         <div class="row">
             <form class="mr-2" method="post" action="/emails/delete/{{$email->id}}">
