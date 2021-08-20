@@ -92,16 +92,9 @@
                             <span class="opener">Emails</span>
                             <ul>
                                 <li><a href="/emails/sentBox">sent box</a></li>
-                                <li><a href="#">inbox</a></li>
-                                <li><a href="#">starred</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <span class="opener">Dropdown Two</span>
-                            <ul>
-                                <li><a href="#">Sub Menu #1</a></li>
-                                <li><a href="#">Sub Menu #2</a></li>
-                                <li><a href="#">Sub Menu #3</a></li>
+                                <li><a href="/emails/inbox">inbox</a></li>
+                                <li><a href="/emails/starBox">starred</a></li>
+                                <li><a href="/emails/deletedBox">deleted</a></li>
                             </ul>
                         </li>
                         <form method="post" action="{{route("logout")}}">

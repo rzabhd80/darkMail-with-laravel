@@ -12,13 +12,13 @@ class EmailController extends Controller
     public function sentBox()
     {
         $emails = Email::where("sender_id", \Auth::user()->id)->get();
-        return view("emails/sentBox", ["emails" => $emails]);
+        return view("emails.box", ["emails" => $emails]);
     }
 
     public function inbox()
     {
         $emails = Email::where("rec_id", \Auth::user()->id)->get();
-        return view("emails.inbox");
+        return view("emails.box", ["emails" => $emails]);
     }
 
     public function create()
@@ -49,5 +49,37 @@ class EmailController extends Controller
         $email_sender = User::find($email->sender_id);
         $email_rec = User::find($email->rec_id);
         return view("emails.detail", ["email" => $email, "email_sender" => $email_sender, "email_rec" => $email_rec]);
+    }
+
+    public function delete($id)
+    {
+        $email = Email::find($id);
+        $email->deleted = true;
+        $email->save();
+        return back();
+    }
+
+    public function star($id)
+    {
+        $email = Email::find($id);
+        $email->starred = true;
+        $email->save();
+    }
+
+    public function starredBox()
+    {
+        $emails = Email::where("sender_id", \Auth::user()->id)->orWhere("rec_id", \Auth::user()->id)->get();
+        $emails = $emails->filter(function ($v) {
+            return $v->starred;
+        });
+        return view("emails.box", ["emails" => $emails]);
+    }
+
+    public function deletedBox()
+    {
+        $emails = Email::where("sender_id", \Auth::user()->email)->orWhere("rec_id", \Auth::user()->id)->filter(function ($v) {
+            return $v->deleted;
+        });
+        return view("emails.box",["emails"=>$emails]);
     }
 }

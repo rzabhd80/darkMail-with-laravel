@@ -4,22 +4,39 @@
 @endsection
 
 @section("content")
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">sender</th>
-            <th scope="col">receiver</th>
-            <th scope="col">title</th>
-            <th scope="col">text</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>{{$email_sender->email}}</td>
-            <td>{{$email_sender->email}}</td>
-            <td>{{$email->title}}</td>
-            <td>{{$email->text}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <ul class="list-unstyled">
+        <div>
+            <label>title</label>
+            <li>{{$email->title}}</li>
+        </div>
+        <br>
+        <div>
+            <label>text</label>
+            <li>{{$email->text}}</li>
+        </div>
+        <br>
+        <div>
+            <label>From</label>
+            <li>{{$email_sender->email}}</li>
+        </div>
+        <br>
+        <div>
+            <label>TO</label>
+            <li>{{$email_rec->email}}</li>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <form class="mr-2" method="post" action="/emails/delete/{{$email->id}}">
+                @method("PUT")
+                @csrf
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+            <form method="post" action="/emails/star/{{$email->id}}">
+                @method("PUT")
+                @csrf
+                <button class="btn btn-primary" type="submit">Star</button>
+            </form>
+        </div>
+    </ul>
 @endsection

@@ -24,5 +24,10 @@ Route::prefix("/emails")->middleware("auth")->group(function () {
     Route::get("/sentBox",[\App\Http\Controllers\EmailController::class,"sentBox"]);
     Route::get("/create",[\App\Http\Controllers\EmailController::class,"create"]);
     Route::post("/save",[\App\Http\Controllers\EmailController::class,"save"]);
+    Route::put("/delete/{id}",[\App\Http\Controllers\EmailController::class,"delete"]);
+    Route::put("/star/{id}",[\App\Http\Controllers\EmailController::class,"star"]);
+    Route::get("/inbox",[\App\Http\Controllers\EmailController::class,"inbox"]);
+    Route::get("/starBox",[\App\Http\Controllers\EmailController::class,"starredBox"]);
+    Route::get("/deletedBox",[\App\Http\Controllers\EmailController::class,"deletedBox"]);
     Route::get("/{id}",[\App\Http\Controllers\EmailController::class,"detail"]);
 });
