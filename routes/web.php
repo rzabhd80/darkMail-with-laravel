@@ -24,4 +24,5 @@ Route::prefix("/emails")->middleware("auth")->group(function () {
     Route::get("/sentBox",[\App\Http\Controllers\EmailController::class,"sentBox"]);
     Route::get("/create",[\App\Http\Controllers\EmailController::class,"create"]);
     Route::post("/save",[\App\Http\Controllers\EmailController::class,"save"]);
+    Route::get("/{id}",[\App\Http\Controllers\EmailController::class,"detail"]);
 });

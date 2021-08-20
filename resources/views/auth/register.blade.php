@@ -98,8 +98,10 @@
 
                 <div class="form-group">
                     <label class="label">email</label>
-                    <input type="email" value="{{old("email")}}" name="email"
-                           class="form-control {{$errors->has("email") ?"border-danger":""}}">
+                    <div class="row col-md-12">
+                        <input type="text" value="{{old("email")}}" name="email"
+                               class="form-control col-md-10  {{$errors->has("email") ?"border-danger":""}}"><p class="col-md-1">  @darkMail.com</p>
+                    </div>
                     @if ($errors->has("email"))
                         <p class="text-danger">{{$errors->first("email")}}</p>
                     @endif
