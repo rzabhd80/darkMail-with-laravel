@@ -1206,7 +1206,14 @@ section.buttons .container-fluid {
     background-color: black;
     margin: -100px -100px 100px -100px;
 }
-
+#avatar {
+    background-image: url('http://i.stack.imgur.com/Dj7eP.jpg');
+    width: 150px;
+    height: 150px;
+    background-size: cover;
+    background-position: top center;
+    border-radius: 50%;
+}
 #header .logo {
     text-align: right;
     display: inline-block;

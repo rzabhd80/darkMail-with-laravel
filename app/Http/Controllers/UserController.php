@@ -17,7 +17,9 @@ class UserController extends Controller
             "profile"=>"required|file|mimes:jpg,png|max:2048"
         ]);
         $profile = \request()->file("profile")->getClientOriginalName();
-        $profile.=time();
+        $profileData = explode(".",$profile);
+        $profileData[0].=time();
+        $profile = $profileData[0].".".$profileData[1];
         \request()->file("profile")->storeAs("public/profiles",$profile);
         \Auth::user()->profile = $profile;
         \Auth::user()->save();

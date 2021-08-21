@@ -3,7 +3,7 @@
     upload profile
 @endsection
 @section("content")
-    <form method="post" enctype="multipart/form-data" action="users/editProfile">
+    <form method="post" enctype="multipart/form-data" action="/users/editProfile">
         @csrf
         @method("PUT")
         <input type="file" name="profile" class="form-control-file">

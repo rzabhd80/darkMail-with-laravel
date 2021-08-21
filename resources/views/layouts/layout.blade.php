@@ -95,6 +95,7 @@
                                 <li><a href="/emails/inbox">inbox</a></li>
                                 <li><a href="/emails/starBox">starred</a></li>
                                 <li><a href="/emails/deletedBox">deleted</a></li>
+                                <li><a href="/emails/draftBox">draft</a></li>
                             </ul>
                         </li>
                         <form method="post" action="{{route("logout")}}">

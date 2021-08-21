@@ -13,7 +13,7 @@ class EmailController extends Controller
     {
         $emails = Email::where("sender_id", \Auth::user()->id)->get();
         $emails = $emails->filter(function ($v) {
-            return !$v->deleted;
+            return !$v->deleted && !$v->draft;
         });
         return view("emails.box", ["emails" => $emails]);
     }
@@ -79,8 +79,11 @@ class EmailController extends Controller
     public function star($id)
     {
         $email = Email::find($id);
-        $email->starred = true;
+       if($email->starred = false)
+           $email->starred = true;
+       else $email->starred = false;
         $email->save();
+        return back();
     }
 
     public function starredBox()
@@ -99,5 +102,12 @@ class EmailController extends Controller
            return $v->deleted;
        });
         return view("emails.box", ["emails" => $emails]);
+    }
+    public function draftBox () {
+        $emails = Email::where("sender_id",\Auth::user()->id)->get();
+        $emails = $emails->filter(function ($v) {
+            return $v->draft;
+        });
+        return view("emails.box",["emails"=>$emails]);
     }
 }

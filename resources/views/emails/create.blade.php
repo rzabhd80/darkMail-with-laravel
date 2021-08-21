@@ -40,6 +40,7 @@
                 @endif
             </div>
             <hr>
+            <input type="checkbox" name="draft" value="save as a draft">
             <button class="btn btn-secondary" type="submit">send</button>
         </form>
     </div>

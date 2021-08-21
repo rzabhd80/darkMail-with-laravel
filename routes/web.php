@@ -35,4 +35,5 @@ Route::prefix("/users")->middleware("auth")->group(function () {
     Route::put("/editProfile",[\App\Http\Controllers\UserController::class,"editProfile"]);
     Route::get("/uploadProfile",[\App\Http\Controllers\UserController::class,"uploadProfile"]);
     Route::put("/editProfile",[\App\Http\Controllers\UserController::class,"editProfile"]);
+    Route::get("/draftBox",[\App\Http\Controllers\EmailController::class,"draftBox"]);
 });

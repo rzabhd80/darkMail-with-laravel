@@ -44,8 +44,10 @@
             <form method="post" action="/emails/star/{{$email->id}}">
                 @method("PUT")
                 @csrf
-                @if (!$email->deleted)
+                @if (!$email->deleted && !$email->starred)
                     <button class="btn btn-primary" type="submit">Star</button>
+                @elseif(!$email->deleted && $email->starred)
+                    <button class="btn btn-primary" type="submit">unStar</button>
                 @endif
             </form>
         </div>
