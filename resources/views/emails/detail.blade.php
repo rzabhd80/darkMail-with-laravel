@@ -26,9 +26,9 @@
         </div>
         <br>
         @if ($email->attach !=null)
-            <div>
+            <div class="d-flex justify-content-center">
                 <label>Attached file</label>
-                <img src="{{asset("storage/attachs/$email->attach")}}">
+                <img src="{{asset("storage/attaches/$email->attach")}}>
             </div>
 
         @endif
@@ -37,12 +37,16 @@
             <form class="mr-2" method="post" action="/emails/delete/{{$email->id}}">
                 @method("PUT")
                 @csrf
-                <button class="btn btn-danger" type="submit">Delete</button>
+             @if (!$email->deleted)
+                    <button class="btn btn-danger" type="submit">Delete</button>
+             @endif
             </form>
             <form method="post" action="/emails/star/{{$email->id}}">
                 @method("PUT")
                 @csrf
-                <button class="btn btn-primary" type="submit">Star</button>
+                @if (!$email->deleted)
+                    <button class="btn btn-primary" type="submit">Star</button>
+                @endif
             </form>
         </div>
     </ul>

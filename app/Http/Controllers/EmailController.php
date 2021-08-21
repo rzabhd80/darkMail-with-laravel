@@ -43,7 +43,7 @@ class EmailController extends Controller
         if (\request()->hasFile("attach")) {
             $fileName = \request()->file("attach")->getClientOriginalName();
             $fileName .= time();
-            \request()->file("attach")->storeAs("public/attachs", $fileName);
+            \request()->file("attach")->storeAs("public/attaches", $fileName);
         } else {
             $fileName = null;
         }
@@ -92,9 +92,10 @@ class EmailController extends Controller
 
     public function deletedBox()
     {
-        $emails = Email::where("sender_id", \Auth::user()->email)->orWhere("rec_id", \Auth::user()->id)->filter(function ($v) {
-            return $v->deleted;
-        });
+       $emails = Email::where("sender_id",auth()->user()->id)->orWhere("rec_id",auth()->user()->id)->get();
+       $emails = $emails->filter(function ($v) {
+           return $v->deleted;
+       });
         return view("emails.box", ["emails" => $emails]);
     }
 }

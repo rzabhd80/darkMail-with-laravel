@@ -84,7 +84,7 @@
                     @if (!Auth::user())
                         <li><a href={{route("login")}}>login</a></li>
                     @else
-                        <li><a href="users/{{Auth::user()->id}}">personal data</a></li>
+                        <li><a href="/users/info">personal data</a></li>
                     @endif
                     <li><a href="{{route("register")}}">register</a></li>
                     @if (Auth::user())

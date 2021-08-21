@@ -29,3 +29,10 @@ Route::prefix("/emails")->middleware("auth")->group(function () {
     Route::get("/deletedBox",[\App\Http\Controllers\EmailController::class,"deletedBox"]);
     Route::get("/{id}",[\App\Http\Controllers\EmailController::class,"detail"]);
 });
+
+Route::prefix("/users")->middleware("auth")->group(function () {
+    Route::get("/info",[\App\Http\Controllers\UserController::class,"accInfo"]);
+    Route::put("/editProfile",[\App\Http\Controllers\UserController::class,"editProfile"]);
+    Route::get("/uploadProfile",[\App\Http\Controllers\UserController::class,"uploadProfile"]);
+    Route::put("/editProfile",[\App\Http\Controllers\UserController::class,"editProfile"]);
+});
