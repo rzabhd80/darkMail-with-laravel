@@ -25,7 +25,6 @@ class CreateEmailsTable extends Migration
             $table->foreign("sender_id")->references("id")->on("users")->onDelete("cascade");
             $table->foreign("rec_id")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
-            $table->unique(["sender_id","rec_id"]);
         });
     }
 

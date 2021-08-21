@@ -25,15 +25,15 @@
             <li>{{$email_rec->email}}</li>
         </div>
         <br>
-        @if ($email->attach !=null)
-            <div class="d-flex justify-content-center">
+        @if ($email->attach != null)
+            <div>
                 <label>Attached file</label>
-                <img src="{{asset("storage/attaches/$email->attach")}}>
-            </div>
+                <img src="{{asset("storage/attaches/$email->attach")}}">
 
+            </div>
         @endif
         <hr>
-        <div class="row">
+        <div>
             <form class="mr-2" method="post" action="/emails/delete/{{$email->id}}">
                 @method("PUT")
                 @csrf

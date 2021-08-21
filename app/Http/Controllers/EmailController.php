@@ -42,7 +42,9 @@ class EmailController extends Controller
         ]);
         if (\request()->hasFile("attach")) {
             $fileName = \request()->file("attach")->getClientOriginalName();
-            $fileName .= time();
+            $fileInfo = explode(".",$fileName);
+            $fileInfo[0].=time();
+            $fileName = $fileInfo[0].".".$fileInfo[1];
             \request()->file("attach")->storeAs("public/attaches", $fileName);
         } else {
             $fileName = null;
