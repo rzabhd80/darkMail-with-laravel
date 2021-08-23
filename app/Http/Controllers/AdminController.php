@@ -56,4 +56,12 @@ class AdminController extends Controller
         $admin = \Auth::guard("admin")->user();
         return view("admins.details",["admin"=>$admin]);
     }
+    public function uploadProfile (){
+        $file = \request()->file("profile")->getClientOriginalName();
+        $file_data = explode(".",$file);
+        $file_data[0].=time();
+        $file = $file_data[0].$file_data[1];
+        \request()->file("profile")->storeAs("public/profiles",$file);
+        return redirect(route("adminsDetail"));
+    }
 }
