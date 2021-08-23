@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+\App\Http\Middleware\LoginCheck::class;
 Auth::routes();
 Auth::routes(["verify"=>true]);
 Route::get("/",[\App\Http\Controllers\HomeController::class,"index"]);
 Route::get("/home",[\App\Http\Controllers\HomeController::class,"index"]);
 
-Route::prefix("/emails")->middleware("auth")->group(function () {
+Route::prefix("/emails")->middleware("loginCheck")->group(function () {
     Route::get("/sentBox",[\App\Http\Controllers\EmailController::class,"sentBox"]);
     Route::get("/create",[\App\Http\Controllers\EmailController::class,"create"]);
     Route::post("/save",[\App\Http\Controllers\EmailController::class,"save"]);
@@ -30,7 +30,7 @@ Route::prefix("/emails")->middleware("auth")->group(function () {
     Route::get("/{id}",[\App\Http\Controllers\EmailController::class,"detail"]);
 });
 
-Route::prefix("/users")->middleware("auth")->group(function () {
+Route::prefix("/users")->middleware('loginCheck')->group(function () {
     Route::get("/info",[\App\Http\Controllers\UserController::class,"accInfo"]);
     Route::put("/editProfile",[\App\Http\Controllers\UserController::class,"editProfile"]);
     Route::get("/uploadProfile",[\App\Http\Controllers\UserController::class,"uploadProfile"]);
@@ -41,7 +41,8 @@ Route::prefix("/users")->middleware("auth")->group(function () {
 Route::prefix("/admins")->group(function () {
     Route::get("/create",[\App\Http\Controllers\AdminController::class,"create"]);
     Route::get("/loginForm",[\App\Http\Controllers\AdminController::class,"loginForm"]);
-    Route::post("/register",[\App\Http\Controllers\AdminController::class,"save"]);
+    Route::post("/register",[\App\Http\Controllers\AdminController::class,"save"])->name("adminRegister");
     Route::post("/logout",[\App\Http\Controllers\AdminController::class,"logout"]);
-    Route::post("/login",[\App\Http\Controllers\AdminController::class,"login"]);
+    Route::post("/login",[\App\Http\Controllers\AdminController::class,"login"])->name("adminsLogin");
+    Route::get("/detail",[\App\Http\Controllers\AdminController::class,"detail"])->name("adminsDetail");
 });

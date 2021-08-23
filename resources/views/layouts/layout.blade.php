@@ -76,18 +76,22 @@
             <!-- Menu -->
             <nav id="menu">
                 <ul>
-                    @if (Auth::user())
+                    @if (Auth::user() || Auth::guard("admin")->check())
                         <li><a href="/emails/create">Compose new mail</a></li>
                     @else
                         <li><a href="/">Homepage</a></li>
                     @endif
-                    @if (!Auth::user())
+                    @if (!Auth::user() && !Auth::guard("admin")->check())
                         <li><a href={{route("login")}}>login</a></li>
                     @else
-                        <li><a href="/users/info">personal data</a></li>
+                        @if (Auth::user())
+                                <li><a href="/users/info">personal data</a></li>
+                            @else
+                                <li><a href={{route("adminsDetail")}}>personal data</a></li>
+                        @endif
                     @endif
                     <li><a href="{{route("register")}}">register</a></li>
-                    @if (Auth::user())
+                    @if (Auth::user() || Auth::guard("admin")->check())
                         <li>
                             <span class="opener">Emails</span>
                             <ul>

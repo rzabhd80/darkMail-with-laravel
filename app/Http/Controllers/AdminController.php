@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function create()
     {
-        return view("auth.register");
+        return view("admins.register");
     }
 
     public function save()
@@ -18,15 +18,15 @@ class AdminController extends Controller
         \request()->validate([
             "name" => "string|required",
             "lastname" => "string|required",
-            "email" => "email|unique:admins,email",
+            "email" => "unique:admins,email",
             "backupEmail" => "email|required",
             "password" => "required|confirmed|min:8"
         ]);
         $admin = new Admin();
         $admin->name = \request("name");
         $admin->lastname = \request("lastname");
-        $admin->email = \request("email");
-        $admin->email = \request("email");
+        $admin->email = \request("email")."@darkMail.com";
+        $admin->backupEmail = \request("backupEmail");
         $admin->password = \Hash::make(\request("password"));
         $admin->save();
         \Auth::guard("admin")->login($admin);
@@ -35,7 +35,7 @@ class AdminController extends Controller
 
     public function loginForm()
     {
-        return view("auth.login");
+        return view("admins.login");
     }
 
     public function login()
@@ -50,5 +50,10 @@ class AdminController extends Controller
     }
     public function logout () {
         \Auth::guard("admin")->logout();
+    }
+
+    public function detail() {
+        $admin = \Auth::guard("admin")->user();
+        return view("admins.details",["admin"=>$admin]);
     }
 }
