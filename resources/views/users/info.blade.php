@@ -4,7 +4,11 @@
 @endsection
 @section("content")
     <div>
-        <div class="rounded ml-5 justify-content-center ml-4"><img id="avatar" src="{{asset("storage/profiles/$user->profile")}}"  alt="avatar"></div>
+        @if(Auth::user()->profile != null)
+            <div class="rounded ml-5 justify-content-center ml-4"><img id="avatar"
+                                                                       src="{{asset("storage/profiles/$user->profile")}}"
+                                                                       alt="avatar"></div>
+        @endif
         <br>
         <table class="table">
             <thead>

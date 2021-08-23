@@ -37,3 +37,11 @@ Route::prefix("/users")->middleware("auth")->group(function () {
     Route::put("/editProfile",[\App\Http\Controllers\UserController::class,"editProfile"]);
     Route::get("/draftBox",[\App\Http\Controllers\EmailController::class,"draftBox"]);
 });
+
+Route::prefix("/admins")->group(function () {
+    Route::get("/create",[\App\Http\Controllers\AdminController::class,"create"]);
+    Route::get("/loginForm",[\App\Http\Controllers\AdminController::class,"loginForm"]);
+    Route::post("/register",[\App\Http\Controllers\AdminController::class,"save"]);
+    Route::post("/logout",[\App\Http\Controllers\AdminController::class,"logout"]);
+    Route::post("/login",[\App\Http\Controllers\AdminController::class,"login"]);
+});

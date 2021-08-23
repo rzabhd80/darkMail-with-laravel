@@ -21,6 +21,9 @@ class UserController extends Controller
         $profileData[0].=time();
         $profile = $profileData[0].".".$profileData[1];
         \request()->file("profile")->storeAs("public/profiles",$profile);
+//        \request()->file("profile")->storeAs("")
+        //or
+        //\Storage::disk("public")->put();
         \Auth::user()->profile = $profile;
         \Auth::user()->save();
         return redirect("/users/info");
