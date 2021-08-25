@@ -95,7 +95,7 @@
                         @else
                             <li><a href="{{route("register")}}">register</a></li>
                    @endif
-                    @if (Auth::user() || Auth::guard("admin")->check())
+                    @if (Auth::user())
                         <li>
                             <span class="opener">Emails</span>
                             <ul>
@@ -106,11 +106,14 @@
                                 <li><a href="/emails/draftBox">draft</a></li>
                             </ul>
                         </li>
-                        <form method="post" action="{{route("logout")}}">
-                            @csrf
-                            <button class="btn btn-secondary" type="submit">log out</button>
-                        </form>
                     @endif
+                    @if (Auth::guard("admin")->check() || Auth::check())
+                            <form method="post" action="{{route("logout")}}">
+                                @csrf
+                                <button class="btn btn-secondary" type="submit">log out</button>
+                            </form> 
+                    @endif
+
                 </ul>
             </nav>
 
