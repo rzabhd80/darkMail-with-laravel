@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Email;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -25,7 +26,7 @@ class AdminController extends Controller
         $admin = new Admin();
         $admin->name = \request("name");
         $admin->lastname = \request("lastname");
-        $admin->email = \request("email")."@darkMail.com";
+        $admin->email = \request("email") . "@darkMail.com";
         $admin->backupEmail = \request("backupEmail");
         $admin->password = \Hash::make(\request("password"));
         $admin->save();
@@ -41,40 +42,59 @@ class AdminController extends Controller
     public function login()
     {
         \request()->validate([
-            "email"=>"required|email",
-            "password"=>"required"
+            "email" => "required|email",
+            "password" => "required"
         ]);
-         $admin = Admin::where("email", \request("email"))->first();
+        $admin = Admin::where("email", \request("email"))->first();
         if ($admin == null)
-            return back()->withErrors(["email"=>"admin not found"]);
+            return back()->withErrors(["email" => "admin not found"]);
         if (\Hash::check(\request("password"), $admin->password)) {
             \Auth::guard("admin")->login($admin);
             return redirect("/");
-        } else return back()->withErrors(["password"=>"password doesnt match"]);
+        } else return back()->withErrors(["password" => "password doesnt match"]);
     }
-    public function logout () {
+
+    public function logout()
+    {
         \Auth::guard("admin")->logout();
     }
 
-    public function detail() {
+    public function detail()
+    {
         $admin = \Auth::guard("admin")->user();
-        return view("admins.details",["admin"=>$admin]);
+        return view("admins.details", ["admin" => $admin]);
     }
-    public function setProfile(){
+
+    public function setProfile()
+    {
         return view("admins.profile");
     }
-    public function uploadProfile (){
+
+    public function uploadProfile()
+    {
         \request()->validate([
-            "profile"=>"required|file|mimes:jpg,png"
+            "profile" => "required|file|mimes:jpg,png"
         ]);
         $file = \request()->file("profile")->getClientOriginalName();
-        $file_data = explode(".",$file);
-        $file_data[0].=time();
-        $file = $file_data[0].".".$file_data[1];
+        $file_data = explode(".", $file);
+        $file_data[0] .= time();
+        $file = $file_data[0] . "." . $file_data[1];
         \Auth::guard("admin")->user()->profile = $file;
         \Auth::guard("admin")->user()->save();
-        \request()->file("profile")->storeAs("public/profiles",$file);
+        \request()->file("profile")->storeAs("public/profiles", $file);
         return redirect(route("adminsDetail"));
+    }
+
+    public function adminPanel()
+    {
+        $users = User::all();
+        return view("admins.users", ["users" => $users]);
+    }
+
+    public function userInfo($id)
+    {
+        $user = User::find($id);
+        return view("admins.userInfo", ["user" => $user]);
     }
 //    public function download () {
 //        $file = \Storage::disk("public")->get("profiles/photo_2021-08-21_18-09-051629553212.jpg");

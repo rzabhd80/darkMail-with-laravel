@@ -90,7 +90,11 @@
                                 <li><a href={{route("adminsDetail")}}>personal data</a></li>
                         @endif
                     @endif
-                    <li><a href="{{route("register")}}">register</a></li>
+                   @if (Auth::guard("admin")->check())
+                       <li><a href="{{route("adminPanel")}}">Admin panel</a></li>
+                        @else
+                            <li><a href="{{route("register")}}">register</a></li>
+                   @endif
                     @if (Auth::user() || Auth::guard("admin")->check())
                         <li>
                             <span class="opener">Emails</span>

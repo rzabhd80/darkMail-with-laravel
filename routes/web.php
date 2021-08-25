@@ -38,7 +38,7 @@ Route::prefix("/users")->middleware('loginCheck')->group(function () {
     Route::get("/draftBox",[\App\Http\Controllers\EmailController::class,"draftBox"]);
 });
 
-Route::prefix("/admins")->group(function () {
+Route::prefix("/admins")->middleware("adminLoginCheck")->group(function () {
     Route::get("/create",[\App\Http\Controllers\AdminController::class,"create"]);
     Route::get("/loginForm",[\App\Http\Controllers\AdminController::class,"loginForm"]);
     Route::post("/register",[\App\Http\Controllers\AdminController::class,"save"])->name("adminRegister");
@@ -47,4 +47,6 @@ Route::prefix("/admins")->group(function () {
     Route::get("/detail",[\App\Http\Controllers\AdminController::class,"detail"])->name("adminsDetail");
     Route::get("/setProfile",[\App\Http\Controllers\AdminController::class,"setProfile"])->name("setProfile");
     Route::put("/profile",[\App\Http\Controllers\AdminController::class,"uploadProfile"])->name("uploadProfile");
+    Route::get("/adminPanel",[\App\Http\Controllers\AdminController::class,"adminPanel"])->name("adminPanel");
+    Route::get("/users/{id}",[\App\Http\Controllers\AdminController::class,"userInfo"]);
 });
