@@ -4,9 +4,9 @@
 @endsection
 @section("content")
     <div>
-        @if(Auth::guard("admin")->user()->profle != null)
+        @if(Auth::guard("admin")->user()->profile != null)
             <div class="rounded ml-5 justify-content-center ml-4"><img id="avatar"
-                                                                       src="{{asset("storage/profiles/$user->profile")}}"
+                                                                       src="{{asset("storage/profiles/$admin->profile")}}"
                                                                        alt="avatar"></div>
         @endif
         <br>
@@ -28,7 +28,7 @@
         </table>
         <div class="row">
             <a href="{{route("password.request")}}" class="btn btn-primary mr-3">reset password</a>
-            <a href="/users/uploadProfile" class="btn btn-primary">upload profile</a>
+            <a href="{{route("setProfile")}}" class="btn btn-primary">upload profile</a>
         </div>
     </div>
 @endsection

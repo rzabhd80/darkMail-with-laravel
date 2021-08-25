@@ -45,5 +45,6 @@ Route::prefix("/admins")->group(function () {
     Route::post("/logout",[\App\Http\Controllers\AdminController::class,"logout"]);
     Route::post("/login",[\App\Http\Controllers\AdminController::class,"login"])->name("adminsLogin");
     Route::get("/detail",[\App\Http\Controllers\AdminController::class,"detail"])->name("adminsDetail");
+    Route::get("/setProfile",[\App\Http\Controllers\AdminController::class,"setProfile"])->name("setProfile");
     Route::put("/profile",[\App\Http\Controllers\AdminController::class,"uploadProfile"])->name("uploadProfile");
 });
