@@ -19,5 +19,6 @@ class AdminLoginCheck
         if(\Auth::guard("admin")->check())
             return $next($request);
         else redirect("/");
+        return redirect("/");
     }
 }
