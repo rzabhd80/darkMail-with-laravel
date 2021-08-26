@@ -111,7 +111,7 @@
                             <form method="post" action="{{route("logout")}}">
                                 @csrf
                                 <button class="btn btn-secondary" type="submit">log out</button>
-                            </form> 
+                            </form>
                     @endif
 
                 </ul>
