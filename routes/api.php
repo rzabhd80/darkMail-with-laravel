@@ -14,6 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get("/users",function (Request $request) {
+    return response()->json(\App\Models\User::all());
 });
+
+Route::get("/emails",function () {
+   return response()->json(\App\Models\Email::all());
+});
+
+Route::get("/users/{id}",function ($id){
+    $user = \App\Models\User::find($id);
+    return response()->json($user);
+});
+
+Route::get("/emails/{id}",function ($id) {
+   $email =  \App\Models\Email::find($id);
+   return response()->json($email);
+});
+
