@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 \App\Http\Middleware\LoginCheck::class;
 Auth::routes();
-Auth::routes(["verify" => true]);
 Route::get("/", [\App\Http\Controllers\HomeController::class, "index"]);
 Route::get("/home", [\App\Http\Controllers\HomeController::class, "index"]);
 
