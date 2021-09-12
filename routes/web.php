@@ -19,6 +19,7 @@ Route::get("/home", [\App\Http\Controllers\HomeController::class, "index"]);
 
 Route::prefix("/emails")->middleware("loginCheck")->group(function () {
     Route::get("/sentBox", [\App\Http\Controllers\EmailController::class, "sentBox"]);
+    Route::get("/draftBox",[\App\Http\Controllers\EmailController::class,"draftBox"]);
     Route::get("/create", [\App\Http\Controllers\EmailController::class, "create"]);
     Route::post("/save", [\App\Http\Controllers\EmailController::class, "save"]);
     Route::put("/delete/{id}", [\App\Http\Controllers\EmailController::class, "delete"]);
