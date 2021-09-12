@@ -20,7 +20,7 @@ class UserController extends Controller
         $profileData = explode(".",$profile);
         $profileData[0].=time();
         $profile = $profileData[0].".".$profileData[1];
-        \request()->file("profile")->storeAs("public/profiles",$profile);
+        \request()->file("profile")->storeAs("profiles",$profile);
 //        \request()->file("profile")->storeAs("")
         //or
         //\Storage::disk("public")->put();
