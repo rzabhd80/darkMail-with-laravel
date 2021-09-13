@@ -21,6 +21,7 @@ Route::prefix("/emails")->middleware("loginCheck")->group(function () {
     Route::get("/sentBox", [\App\Http\Controllers\EmailController::class, "sentBox"]);
     Route::get("/draftBox",[\App\Http\Controllers\EmailController::class,"draftBox"]);
     Route::get("/create", [\App\Http\Controllers\EmailController::class, "create"]);
+    Route::get("/respond/{id}",[\App\Http\Controllers\EmailController::class,"respond"]);
     Route::post("/save", [\App\Http\Controllers\EmailController::class, "save"]);
     Route::put("/delete/{id}", [\App\Http\Controllers\EmailController::class, "delete"]);
     Route::put("/star/{id}", [\App\Http\Controllers\EmailController::class, "star"]);

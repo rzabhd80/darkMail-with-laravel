@@ -33,7 +33,7 @@
             </div>
         @endif
         <hr>
-        <div>
+        <div class="row">
             <form class="mr-2" method="post" action="/emails/delete/{{$email->id}}">
                 @method("PUT")
                 @csrf
@@ -50,6 +50,11 @@
                     <button class="btn btn-primary" type="submit">unStar</button>
                 @endif
             </form>
+            @if ($email->rec_id == Auth::user()->id)
+                <br>
+                <a class="btn btn-success" href="/emails/respond/{{$email->id}}" style="margin-left: 4px">reply</a>
+
+            @endif
         </div>
     </ul>
 @endsection

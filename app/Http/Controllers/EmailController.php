@@ -31,6 +31,12 @@ class EmailController extends Controller
     {
         return view("emails.create");
     }
+    public function respond($id) {
+        $email = Email::findOrFail($id);
+        $user = User::findOrFail($email->sender_id);
+        return view("emails.reply",["user"=>$user]);
+
+    }
 
     public function save()
     {
