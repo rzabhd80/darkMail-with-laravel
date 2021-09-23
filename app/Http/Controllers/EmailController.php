@@ -65,6 +65,8 @@ class EmailController extends Controller
         $email->rec_id = \request("receiver");
         $email->sender_id = \Auth::user()->id;
         $email->attach = $fileName;
+        if (\request()->has("draft"))
+            $email->draft = true;
         $email->save();
         return redirect("/emails/sentBox");
     }
@@ -114,11 +116,11 @@ class EmailController extends Controller
     public function star($id)
     {
         $email = Email::find($id);
-        if ($email->starred = false)
+        if ($email->starred == false)
             $email->starred = true;
         else $email->starred = false;
         $email->save();
-        return back();
+        return redirect("/emails/starBox");
     }
 
     public function starredBox()
