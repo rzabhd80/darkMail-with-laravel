@@ -18,8 +18,8 @@
                 <label>title</label>
                 <input type="text" name="title" value="{{old("title")}}"
                        class="form-control {{$errors->has("receiver")?"border-danger":""}}">
-                @if($errors->has("receiver"))
-                    <p class="text-danger">{{$errors->first("receiver")}}</p>
+                @if($errors->has("title"))
+                    <p class="text-danger">{{$errors->first("title")}}</p>
                 @endif
             </div>
 
@@ -40,8 +40,10 @@
                 @endif
             </div>
             <hr>
-            <input type="checkbox" name="draft" value="save as a draft">
-            <button class="btn btn-secondary" type="submit">send</button>
+            <input type="checkbox" class="form-check" name="draft" width="10px" height="20px">
+            <div>
+                <button class="btn btn-secondary" type="submit">send</button>
+            </div>
         </form>
     </div>
 @endsection
